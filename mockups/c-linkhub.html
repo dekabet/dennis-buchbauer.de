@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dennis Buchbauer – Mockup C: Link Hub</title>
+<link rel="icon" href="../assets/img/DBFavicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #111; --ink2: #5b5a56; --muted: #8d8c87; --card: rgba(255,255,255,.78); --line: rgba(17,17,17,.08); --blue: #2a78d6; --orange: #eb6834; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font: 15px/1.5 Inter, system-ui, sans-serif; color: var(--ink); background: #f3f1ec; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+  body::before { content: ""; position: fixed; inset: 0; z-index: -1;
+    background: radial-gradient(600px 400px at 15% 5%, rgba(42,120,214,.20), transparent 70%),
+                radial-gradient(500px 420px at 90% 30%, rgba(235,104,52,.16), transparent 70%),
+                radial-gradient(600px 500px at 40% 100%, rgba(27,175,122,.12), transparent 70%); }
+  a { color: inherit; text-decoration: none; }
+  .col { max-width: 520px; margin: 0 auto; padding: 28px 16px 40px; }
+
+  .hero { position: relative; border-radius: 30px; overflow: hidden; background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,.08); }
+  .hero img { width: 100%; height: 440px; object-fit: cover; object-position: 50% 6%; display: block; }
+  .hero .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(10,10,10,.82) 100%); }
+  .hero .txt { position: absolute; left: 24px; right: 24px; bottom: 22px; color: #fff; }
+  .hero h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; display: flex; align-items: center; gap: 8px; }
+  .verified { width: 22px; height: 22px; }
+  .hero .role { opacity: .85; margin-top: 4px; font-size: 15px; }
+  .hero .loc { font-size: 13px; opacity: .75; margin-top: 6px; }
+  .status { position: absolute; top: 16px; left: 16px; display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,.92);
+            backdrop-filter: blur(8px); padding: 7px 12px 7px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 500; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #1baf7a; animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(27,175,122,.5);} 70% { box-shadow: 0 0 0 8px rgba(27,175,122,0);} 100% { box-shadow: 0 0 0 0 rgba(27,175,122,0);} }
+
+  .bio { margin: 22px 6px 0; color: var(--ink2); font-size: 15.5px; text-align: center; }
+  .socials { display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
+  .socials a { width: 46px; height: 46px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); display: grid; place-items: center; backdrop-filter: blur(10px); }
+  .socials svg { width: 19px; height: 19px; }
+
+  .h { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 30px 6px 12px; }
+
+  .featured { display: block; border-radius: 24px; padding: 18px; color: #fff; background: #121212; position: relative; overflow: hidden; }
+  .featured::after { content: ""; position: absolute; right: -60px; top: -60px; width: 220px; height: 220px; border-radius: 50%;
+                     background: radial-gradient(circle, rgba(42,120,214,.55), transparent 70%); }
+  .featured .top { display: flex; gap: 16px; position: relative; z-index: 1; }
+  .featured img { width: 92px; border-radius: 8px; box-shadow: 0 12px 30px rgba(0,0,0,.5); flex-shrink: 0; }
+  .featured .new { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: #ffb08f; }
+  .featured h2 { font-size: 21px; letter-spacing: -0.02em; line-height: 1.15; margin-top: 6px; }
+  .featured p { font-size: 13.5px; color: #c2c1bc; margin-top: 6px; }
+  .featured .row { display: flex; gap: 8px; margin-top: 16px; position: relative; z-index: 1; }
+  .featured .row a { flex: 1; text-align: center; padding: 11px; border-radius: 12px; font-weight: 600; font-size: 14px; background: #fff; color: #111; }
+  .featured .row a.alt { background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.18); }
+
+  .link { display: flex; align-items: center; gap: 14px; padding: 10px 14px 10px 10px; border-radius: 18px; background: var(--card);
+          border: 1px solid var(--line); backdrop-filter: blur(10px); margin-bottom: 10px; transition: transform .15s, box-shadow .15s; }
+  .link:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.07); }
+  .link img { width: 46px; height: 60px; object-fit: cover; object-position: top; border-radius: 6px; border: 1px solid var(--line); background: #fff; }
+  .link .t { flex: 1; min-width: 0; }
+  .link b { display: block; font-weight: 600; font-size: 15px; line-height: 1.25; }
+  .link span { font-size: 12.5px; color: var(--muted); }
+  .link .arr { color: var(--muted); font-size: 18px; }
+
+  .partner { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-radius: 18px; background: #fff; border: 1px solid var(--line); }
+  .partner img { height: 34px; }
+  .partner span { font-size: 12.5px; color: var(--muted); text-align: right; }
+
+  .cta { display: block; text-align: center; margin-top: 26px; padding: 16px; border-radius: 18px; background: var(--ink); color: #fff; font-weight: 600; font-size: 16px; }
+  .foot { text-align: center; font-size: 12px; color: var(--muted); margin-top: 22px; }
+</style>
+</head>
+<body>
+<div class="col">
+  <div class="hero">
+    <img src="../assets/img/profile/dennis-buchbauer.png" alt="Dennis Buchbauer">
+    <div class="shade"></div>
+    <div class="status"><span class="dot"></span>New paper out · Oct 2026</div>
+    <div class="txt">
+      <h1>Dennis Buchbauer</h1>
+      <div class="role">Predictive &amp; Betting Analytics Expert</div>
+      <div class="loc">📍 Based in Germany 🇩🇪</div>
+    </div>
+  </div>
+
+  <p class="bio">Transforming data into actionable predictions. Specialized in sports betting analytics and real-world event forecasting, with a background in consumer behavior prediction.</p>
+
+  <div class="socials">
+    <a href="mailto:buchbauer22@gmail.com" title="Email"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></a>
+    <a href="https://www.linkedin.com/in/dennisbuchbauer/" title="LinkedIn"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+    <a href="https://x.com/BuchbauerDennis" title="X"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23zm-1.16 17.52h1.83L7.08 4.13H5.12z"/></svg></a>
+    <a href="https://www.tiktok.com/@wette.de" title="TikTok"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 11-2.89-2.89c.3 0 .6.05.88.13V9.4a6.34 6.34 0 105.46 6.27v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/></svg></a>
+  </div>
+
+  <div class="h">Latest research</div>
+  <div class="featured">
+    <div class="top">
+      <img src="img/margin.png" alt="">
+      <div>
+        <div class="new">NEW · 19 PAGES</div>
+        <h2>The Margin Paradox</h2>
+        <p>How AI pushes betting margins down on single bets – and up on everything else.</p>
+      </div>
+    </div>
+    <div class="row">
+      <a href="../AI-Betting-Margins-Research-Dennis-Buchbauer-2026.pdf">Read · EN</a>
+      <a class="alt" href="../KI-Sportwetten-Margen-Studie-Dennis-Buchbauer-2026.pdf">Lesen · DE</a>
+    </div>
+  </div>
+
+  <div class="h">Research library</div>
+  <a class="link" href="../Predictive-Analytics-by-Dennis-Buchbauer.pdf"><img src="img/pred.png" alt=""><div class="t"><b>Predictive Analytics in Sports Betting</b><span>Predictive Models · 2025 · 38 pages</span></div><span class="arr">↗</span></a>
+  <a class="link" href="../Sports-Analytics-German-Football-2025.pdf"><img src="img/sports.png" alt=""><div class="t"><b>Sports Analytics in German Football</b><span>Sports Analytics · 2025 · 26 pages</span></div><span class="arr">↗</span></a>
+  <a class="link" href="../Wettverhalten-in-Deutschland.pdf"><img src="img/wett.png" alt=""><div class="t"><b>Wettverhalten in Deutschland</b><span>Betting Analytics · 2025 · DE</span></div><span class="arr">↗</span></a>
+  <a class="link" href="../konsumentenverhalten-im-leh-db.pdf"><img src="img/leh.png" alt=""><div class="t"><b>Konsumentenverhalten im LEH</b><span>Consumer Behavior · 2024 · DE</span></div><span class="arr">↗</span></a>
+
+  <div class="h">Exclusive partner</div>
+  <a class="partner" href="https://www.wette.de/"><img src="../Wette.de-logo.png" alt="wette.de"><span>Exclusive betting<br>analytics partner ↗</span></a>
+
+  <a class="cta" href="mailto:buchbauer22@gmail.com">Work with me →</a>
+  <div class="foot">© 2026 Dennis Buchbauer · Predictive &amp; Betting Analytics</div>
+</div>
+</body>
+</html>
